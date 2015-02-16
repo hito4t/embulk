@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release 0.4.1 &mdash; Embulk 0.4 documentation</title>
+    <title>Release 0.4.2 &mdash; Embulk 0.4 documentation</title>
     
     <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -25,41 +25,39 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Embulk 0.4 documentation" href="../index.html" />
     <link rel="up" title="Release Notes" href="../release.html" />
-    <link rel="next" title="Release 0.4.2" href="release-0.4.2.html" />
-    <link rel="prev" title="Release 0.4.0" href="release-0.4.0.html" /> 
+    <link rel="prev" title="Release 0.4.1" href="release-0.4.1.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="../index.html">
           <span>Embulk 0.4 documentation</span></a></h1>
-        <h2 class="heading"><span>Release 0.4.1</span></h2>
+        <h2 class="heading"><span>Release 0.4.2</span></h2>
       </div>
       <div class="topnav">
       
         <p>
-        «&#160;&#160;<a href="release-0.4.0.html">Release 0.4.0</a>
+        «&#160;&#160;<a href="release-0.4.1.html">Release 0.4.1</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
-        &#160;&#160;::&#160;&#160;
-        <a href="release-0.4.2.html">Release 0.4.2</a>&#160;&#160;»
         </p>
 
       </div>
       <div class="content">
         
         
-  <div class="section" id="release-0-4-1">
-<h1>Release 0.4.1<a class="headerlink" href="#release-0-4-1" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="release-0-4-2">
+<h1>Release 0.4.2<a class="headerlink" href="#release-0-4-2" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="cli">
 <h2>CLI<a class="headerlink" href="#cli" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">--version</span></tt> exists with code=0 (&#64;yuskesh++)</li>
+<li>Removed support for setting <tt class="docutils literal"><span class="pre">-</span></tt> to <tt class="docutils literal"><span class="pre">-o,</span> <span class="pre">--output</span> <span class="pre">PATH</span></tt> option</li>
 </ul>
 </div>
 <div class="section" id="general-changes">
 <h2>General Changes<a class="headerlink" href="#general-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Fixed a build script problem where it uploads corrupted CLI jar file</li>
-<li>Updated document build script to not depend on externally installed &#8220;yardoc&#8221; command</li>
+<li>Fixed guess plugin paths (&#64;takei-yuya++)</li>
+<li>Fixed syntax error in generated gemspec file</li>
+<li>Fixed syntax error in generated generated ruby filter and input plugins (&#64;takei-yuya++, also reported by hiroyuki-sato)</li>
 </ul>
 </div>
 <div class="section" id="release-date">
@@ -73,11 +71,9 @@
       <div class="bottomnav">
       
         <p>
-        «&#160;&#160;<a href="release-0.4.0.html">Release 0.4.0</a>
+        «&#160;&#160;<a href="release-0.4.1.html">Release 0.4.1</a>
         &#160;&#160;::&#160;&#160;
         <a class="uplink" href="../index.html">Contents</a>
-        &#160;&#160;::&#160;&#160;
-        <a href="release-0.4.2.html">Release 0.4.2</a>&#160;&#160;»
         </p>
 
       </div>
