@@ -313,7 +313,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#transaction-class_method" title="transaction (class method)">+ (Object) <strong>transaction</strong>(config, schema, processor_count) {|config| ... }</a>
+      <a href="#transaction-class_method" title="transaction (class method)">+ (Object) <strong>transaction</strong>(config, schema, task_count) {|config| ... }</a>
     
 
     
@@ -838,7 +838,7 @@
       <div class="method_details ">
   <h3 class="signature " id="transaction-class_method">
   
-    + (<tt>Object</tt>) <strong>transaction</strong>(config, schema, processor_count) {|config| ... }
+    + (<tt>Object</tt>) <strong>transaction</strong>(config, schema, task_count) {|config| ... }
   
 
   
@@ -880,7 +880,7 @@
     <td>
       <pre class="code"><span class="info file"># File '/home/travis/build/embulk/embulk/lib/embulk/output_plugin.rb', line 8</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span><span class='lparen'>(</span><span class='id identifier rubyid_config'>config</span><span class='comma'>,</span> <span class='id identifier rubyid_schema'>schema</span><span class='comma'>,</span> <span class='id identifier rubyid_processor_count'>processor_count</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_control'>control</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_transaction'>transaction</span><span class='lparen'>(</span><span class='id identifier rubyid_config'>config</span><span class='comma'>,</span> <span class='id identifier rubyid_schema'>schema</span><span class='comma'>,</span> <span class='id identifier rubyid_task_count'>task_count</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_control'>control</span><span class='rparen'>)</span>
   <span class='kw'>yield</span><span class='lparen'>(</span><span class='id identifier rubyid_config'>config</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
@@ -1094,7 +1094,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Feb 18 23:03:52 2015 by
+  Generated on Wed Feb 18 23:15:36 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
