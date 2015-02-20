@@ -93,20 +93,10 @@
   
     <dl class="constants">
       
-        <dt id="RFC_822_1123-constant" class="">RFC_822_1123 =
-          
-        </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='const'>WEEKDAY_NAME_SHORT</span><span class='rbrace'>}</span><span class='tstring_content'>, \d\d </span><span class='embexpr_beg'>#{</span><span class='const'>MONTH_NAME_SHORT</span><span class='rbrace'>}</span><span class='tstring_content'> \d\d\d\d \d\d:\d\d:\d\d [a-zA-Z]{3}$</span><span class='regexp_end'>/</span></span></pre></dd>
-      
-        <dt id="RFC_850_1035-constant" class="">RFC_850_1035 =
-          
-        </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='const'>WEEKDAY_NAME_FULL</span><span class='rbrace'>}</span><span class='tstring_content'>, \d\d-</span><span class='embexpr_beg'>#{</span><span class='const'>MONTH_NAME_SHORT</span><span class='rbrace'>}</span><span class='tstring_content'>-\d\d \d\d:\d\d:\d\d [a-zA-Z]{3}$</span><span class='regexp_end'>/</span></span></pre></dd>
-      
         <dt id="APACHE_CLF-constant" class="">APACHE_CLF =
           
         </dt>
-        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\d\d\/</span><span class='embexpr_beg'>#{</span><span class='const'>MONTH_NAME_SHORT</span><span class='rbrace'>}</span><span class='tstring_content'>\/\d\d\d\d \d\d:\d\d:\d\d [\-\+]\d\d(?::?\d\d)?$</span><span class='regexp_end'>/</span></span></pre></dd>
+        <dd><pre class="code"><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^\d\d\/</span><span class='embexpr_beg'>#{</span><span class='const'>MONTH_NAME_SHORT</span><span class='rbrace'>}</span><span class='tstring_content'>\/\d\d\d\d:\d\d:\d\d:\d\d </span><span class='embexpr_beg'>#{</span><span class='const'>ZONE_OFF</span><span class='rbrace'>}</span><span class='tstring_content'>?$</span><span class='regexp_end'>/</span></span></pre></dd>
       
         <dt id="ANSI_C_ASCTIME-constant" class="">ANSI_C_ASCTIME =
           
@@ -122,7 +112,7 @@
   
   <h3 class="inherited">Constants included
      from <span class='object_link'><a href="Parts.html" title="Embulk::Guess::TimeFormatGuess::Parts (module)">Parts</a></span></h3>
-  <p class="inherited"><span class='object_link'><a href="Parts.html#DAY-constant" title="Embulk::Guess::TimeFormatGuess::Parts::DAY (constant)">Parts::DAY</a></span>, <span class='object_link'><a href="Parts.html#DAY_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::DAY_NODELIM (constant)">Parts::DAY_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#HOUR-constant" title="Embulk::Guess::TimeFormatGuess::Parts::HOUR (constant)">Parts::HOUR</a></span>, <span class='object_link'><a href="Parts.html#HOUR_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::HOUR_NODELIM (constant)">Parts::HOUR_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#MINUTE-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MINUTE (constant)">Parts::MINUTE</a></span>, <span class='object_link'><a href="Parts.html#MINUTE_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MINUTE_NODELIM (constant)">Parts::MINUTE_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#MONTH-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH (constant)">Parts::MONTH</a></span>, <span class='object_link'><a href="Parts.html#MONTH_NAME_FULL-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH_NAME_FULL (constant)">Parts::MONTH_NAME_FULL</a></span>, <span class='object_link'><a href="Parts.html#MONTH_NAME_SHORT-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH_NAME_SHORT (constant)">Parts::MONTH_NAME_SHORT</a></span>, <span class='object_link'><a href="Parts.html#MONTH_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH_NODELIM (constant)">Parts::MONTH_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#WEEKDAY_NAME_FULL-constant" title="Embulk::Guess::TimeFormatGuess::Parts::WEEKDAY_NAME_FULL (constant)">Parts::WEEKDAY_NAME_FULL</a></span>, <span class='object_link'><a href="Parts.html#WEEKDAY_NAME_SHORT-constant" title="Embulk::Guess::TimeFormatGuess::Parts::WEEKDAY_NAME_SHORT (constant)">Parts::WEEKDAY_NAME_SHORT</a></span>, <span class='object_link'><a href="Parts.html#YEAR-constant" title="Embulk::Guess::TimeFormatGuess::Parts::YEAR (constant)">Parts::YEAR</a></span></p>
+  <p class="inherited"><span class='object_link'><a href="Parts.html#DAY-constant" title="Embulk::Guess::TimeFormatGuess::Parts::DAY (constant)">Parts::DAY</a></span>, <span class='object_link'><a href="Parts.html#DAY_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::DAY_NODELIM (constant)">Parts::DAY_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#HOUR-constant" title="Embulk::Guess::TimeFormatGuess::Parts::HOUR (constant)">Parts::HOUR</a></span>, <span class='object_link'><a href="Parts.html#HOUR_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::HOUR_NODELIM (constant)">Parts::HOUR_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#MINUTE-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MINUTE (constant)">Parts::MINUTE</a></span>, <span class='object_link'><a href="Parts.html#MINUTE_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MINUTE_NODELIM (constant)">Parts::MINUTE_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#MONTH-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH (constant)">Parts::MONTH</a></span>, <span class='object_link'><a href="Parts.html#MONTH_NAME_FULL-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH_NAME_FULL (constant)">Parts::MONTH_NAME_FULL</a></span>, <span class='object_link'><a href="Parts.html#MONTH_NAME_SHORT-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH_NAME_SHORT (constant)">Parts::MONTH_NAME_SHORT</a></span>, <span class='object_link'><a href="Parts.html#MONTH_NODELIM-constant" title="Embulk::Guess::TimeFormatGuess::Parts::MONTH_NODELIM (constant)">Parts::MONTH_NODELIM</a></span>, <span class='object_link'><a href="Parts.html#WEEKDAY_NAME_FULL-constant" title="Embulk::Guess::TimeFormatGuess::Parts::WEEKDAY_NAME_FULL (constant)">Parts::WEEKDAY_NAME_FULL</a></span>, <span class='object_link'><a href="Parts.html#WEEKDAY_NAME_SHORT-constant" title="Embulk::Guess::TimeFormatGuess::Parts::WEEKDAY_NAME_SHORT (constant)">Parts::WEEKDAY_NAME_SHORT</a></span>, <span class='object_link'><a href="Parts.html#YEAR-constant" title="Embulk::Guess::TimeFormatGuess::Parts::YEAR (constant)">Parts::YEAR</a></span>, <span class='object_link'><a href="Parts.html#ZONE_ABB-constant" title="Embulk::Guess::TimeFormatGuess::Parts::ZONE_ABB (constant)">Parts::ZONE_ABB</a></span>, <span class='object_link'><a href="Parts.html#ZONE_OFF-constant" title="Embulk::Guess::TimeFormatGuess::Parts::ZONE_OFF (constant)">Parts::ZONE_OFF</a></span></p>
 
 
 
@@ -139,7 +129,7 @@
 </div>
 
     <div id="footer">
-  Generated on Fri Feb 20 06:47:25 2015 by
+  Generated on Fri Feb 20 23:49:48 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
