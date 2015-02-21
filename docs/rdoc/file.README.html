@@ -106,18 +106,32 @@ src="https://gist.githubusercontent.com/frsyuki/f322a77ee2766a508ba9/raw/e8539b6
 <p>The single-file package is the simplest way to try Embulk. You can download
 the latest embulk-VERSION.jar from <a
 href="https://bintray.com/embulk/maven/embulk/view#files">the releases
-page</a> and run it with java:</p>
+page</a> and run it with java.</p>
 
-<pre class="code ruby"><code class="ruby">wget https://bintray.com/artifact/download/embulk/maven/embulk-0.4.5.jar -O embulk.jar
-java -jar embulk.jar --help</code></pre>
+<h3 id="label-Linux+%26+Mac+%26+BSD">Linux &amp; Mac &amp; BSD</h3>
+
+<p>Following 4 commans install embulk to your home directory:</p>
+
+<pre class="code ruby"><code class="ruby">curl --create-dirs -o ~/.embulk/bin/embulk -L https://bintray.com/artifact/download/embulk/maven/embulk-0.4.6.jar
+chmod +x ~/.embulk/bin/embulk
+echo 'export PATH=&quot;$HOME/.embulk/bin:$PATH&quot;' &gt;&gt; ~/.bashrc
+source ~/.bashrc</code></pre>
+
+<h3 id="label-Windows">Windows</h3>
+
+<p>You can assume the jar file is a .bat file.</p>
+
+<pre class="code ruby"><code class="ruby">curl -o embulk.bat -L https://bintray.com/artifact/download/embulk/maven/embulk-0.4.5.jar</code></pre>
+
+<h3 id="label-Trying+examples">Trying examples</h3>
 
 <p>Let's load a CSV file, for example. <code>embulk example</code> subcommand
 generates a csv file and config file for you.</p>
 
-<pre class="code ruby"><code class="ruby">java -jar embulk.jar example ./try1
-java -jar embulk.jar guess   ./try1/example.yml -o config.yml
-java -jar embulk.jar preview config.yml
-java -jar embulk.jar run     config.yml</code></pre>
+<pre class="code ruby"><code class="ruby">embulk example ./try1
+embulk guess   ./try1/example.yml -o config.yml
+embulk preview config.yml
+embulk run     config.yml</code></pre>
 
 <h3 id="label-Using+plugins">Using plugins</h3>
 
@@ -126,8 +140,8 @@ An example is <a
 href="https://github.com/frsyuki/embulk-output-postgres-json">embulk-output-postgres-json</a>
 plugin. It outputs data into PostgreSQL server using "json" column type.</p>
 
-<pre class="code ruby"><code class="ruby">java -jar embulk.jar gem install embulk-output-postgres-json
-java -jar embulk.jar gem list</code></pre>
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_embulk'>embulk</span> <span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_install'>install</span> <span class='id identifier rubyid_embulk'>embulk</span><span class='op'>-</span><span class='id identifier rubyid_output'>output</span><span class='op'>-</span><span class='id identifier rubyid_postgres'>postgres</span><span class='op'>-</span><span class='id identifier rubyid_json'>json</span>
+<span class='id identifier rubyid_embulk'>embulk</span> <span class='id identifier rubyid_gem'>gem</span> <span class='id identifier rubyid_list'>list</span></code></pre>
 
 <p>You can search plugins on RubyGems: <a
 href="https://rubygems.org/search?utf8=%E2%9C%93&query=embulk">search for
@@ -142,9 +156,9 @@ generates some example plugins to &lt;bundle_dir&gt;/embulk/*.rb directory.</p>
 
 <p>See generated &lt;bundle_dir&gt;/Gemfile file how to plugin bundles work.</p>
 
-<pre class="code ruby"><code class="ruby">java -jar embulk.jar bundle ./embulk_bundle
-java -jar embulk.jar guess  -b ./embulk_bundle ...
-java -jar embulk.jar run    -b ./embulk_bundle ...</code></pre>
+<pre class="code ruby"><code class="ruby">embulk bundle ./embulk_bundle
+embulk guess  -b ./embulk_bundle ...
+embulk run    -b ./embulk_bundle ...</code></pre>
 
 <h3 id="label-Releasing+plugins+to+RubyGems">Releasing plugins to RubyGems</h3>
 
@@ -157,17 +171,17 @@ java -jar embulk.jar run    -b ./embulk_bundle ...</code></pre>
 <p>Embulk supports resuming failed transactions. To enable resuming, you need
 to start transaction with <code>-r PATH</code> option:</p>
 
-<pre class="code ruby"><code class="ruby">java -jar embulk.jar run config.yml -r resume-state.yml</code></pre>
+<pre class="code ruby"><code class="ruby">embulk run config.yml -r resume-state.yml</code></pre>
 
 <p>If the transaction fails, embulk stores state some states to the yaml file.
 You can retry the transaction using exactly same command:</p>
 
-<pre class="code ruby"><code class="ruby">java -jar embulk.jar run config.yml -r resume-state.yml</code></pre>
+<pre class="code ruby"><code class="ruby">embulk run config.yml -r resume-state.yml</code></pre>
 
 <p>If you giveup to resume the transaction, you can use <code>embulk
 cleanup</code> subcommand to delete intermediate data:</p>
 
-<pre class="code ruby"><code class="ruby">java -jar embulk.jar cleanup config.yml -r resume-state.yml</code></pre>
+<pre class="code ruby"><code class="ruby">embulk cleanup config.yml -r resume-state.yml</code></pre>
 
 <h2 id="label-Embulk+Development">Embulk Development</h2>
 
@@ -234,7 +248,7 @@ to acquire bintray API Keys</a></p>
 </div></div>
 
     <div id="footer">
-  Generated on Sat Feb 21 00:05:33 2015 by
+  Generated on Sat Feb 21 06:21:09 2015 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-1.9.3).
 </div>
