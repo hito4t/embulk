@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Scheduled bulk data loading to Elasticsearch + Kibana 4 from CSV files &mdash; Embulk 0.4 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Embulk 0.4 documentation" href="../index.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../index.html">
+          <span>Embulk 0.4 documentation</span></a></h1>
+        <h2 class="heading"><span>Scheduled bulk data loading to Elasticsearch + Kibana 4 from CSV files</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="scheduled-bulk-data-loading-to-elasticsearch-kibana-4-from-csv-files">
+<h1>Scheduled bulk data loading to Elasticsearch + Kibana 4 from CSV files<a class="headerlink" href="#scheduled-bulk-data-loading-to-elasticsearch-kibana-4-from-csv-files" title="Permalink to this headline">¶</a></h1>
+<p>This article shows how to:</p>
+<ul class="simple">
+<li>Collect CSV files to Elasticsearch.</li>
+<li>Schedule the data loading every hour using cron.</li>
+<li>Visualize the data with Kibana in real-time.</li>
+</ul>
+<p>This guide assumes you are using Ubuntu 12.0 Precise.</p>
+<div class="section" id="setup-elasticsearch-and-kibana-4">
+<h2>Setup: Elasticsearch and Kibana 4<a class="headerlink" href="#setup-elasticsearch-and-kibana-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-download-and-start-elasticsearch">
+<h3>Step 1. Download and start Elasticsearch.<a class="headerlink" href="#step-1-download-and-start-elasticsearch" title="Permalink to this headline">¶</a></h3>
+<p>You can find releases from [Elasticsearch website](<a class="reference external" href="http://www.elasticsearch.org/download/">http://www.elasticsearch.org/download/</a>).
+For the smallest setup, you can unzip the package and run <cite>./bin/elasticsearch</cite> command:</p>
+<blockquote>
+<div>$ wget <a class="reference external" href="https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.4.zip">https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.4.zip</a>
+$ unzip elasticsearch-1.4.4.zip
+$ cd elasticsearch-1.4.4
+$ ./bin/elasticsearch</div></blockquote>
+</div>
+<div class="section" id="step-2-download-and-unzip-kibana">
+<h3>Step 2. Download and unzip Kibana:<a class="headerlink" href="#step-2-download-and-unzip-kibana" title="Permalink to this headline">¶</a></h3>
+<p>You can find releases from [Kibana website](<a class="reference external" href="http://www.elasticsearch.org/overview/kibana/installation/">http://www.elasticsearch.org/overview/kibana/installation/</a>). Open new terminal and run following commands:</p>
+<blockquote>
+<div>$ wget <a class="reference external" href="https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-linux-x64.tar.gz">https://download.elasticsearch.org/kibana/kibana/kibana-4.0.0-linux-x64.tar.gz</a>
+$ tar zxvf kibana-4.0.0-linux-x64.tar.gz
+$ ./bin/kibana</div></blockquote>
+<p>Now Elasticsearch and Kibana started. Open <a class="reference external" href="http://localhost:5601/">http://localhost:5601/</a> using your browser to see the Kibana&#8217;s graphical interface.</p>
+</div>
+</div>
+<div class="section" id="setup-embulk">
+<h2>Setup: Embulk<a class="headerlink" href="#setup-embulk" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-download-embulk-binary">
+<h3>Step 1. Download Embulk binary:<a class="headerlink" href="#step-1-download-embulk-binary" title="Permalink to this headline">¶</a></h3>
+<p>You can find the latest embulk binary from the [releases](<a class="reference external" href="https://bintray.com/embulk/maven/embulk/view#files">https://bintray.com/embulk/maven/embulk/view#files</a>). Because Embulk is a single executable binary, you can simply download it to /usr/local/bin directory and set executable flag as following:</p>
+<blockquote>
+<div>$ sudo wget <a class="reference external" href="https://bintray.com/artifact/download/embulk/maven/embulk-0.4.5.jar">https://bintray.com/artifact/download/embulk/maven/embulk-0.4.5.jar</a> -O /usr/local/bin/embulk
+$ sudo chmod +x /usr/local/bin/embulk</div></blockquote>
+</div>
+<div class="section" id="step-2-install-elasticsearch-plugin">
+<h3>Step 2. Install Elasticsearch plugin<a class="headerlink" href="#step-2-install-elasticsearch-plugin" title="Permalink to this headline">¶</a></h3>
+<p>To load data to Elasticsearch, you also need Elasticsearch plugin for Embulk. You can install the plugin with this command:</p>
+<blockquote>
+<div>$ embulk gem install embulk-output-elasticsearch</div></blockquote>
+<p>Embulk includes CSV file reader in itself. Now everything is ready to use.</p>
+</div>
+</div>
+<div class="section" id="loading-a-csv-file">
+<h2>Loading a CSV file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<p>Assuming you have a CSV files at <tt class="docutils literal"><span class="pre">./mydata/csv/</span></tt> directory. If you don&#8217;t have CSV files, you can create ones using <tt class="docutils literal"><span class="pre">embulk</span> <span class="pre">example</span> <span class="pre">./mydata</span></tt> command.</p>
+<p>Create this configuration file named <tt class="docutils literal"><span class="pre">config.yml</span></tt>:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>in:</dt>
+<dd>type: file
+path_prefix: ./mydata/csv/</dd>
+<dt>out:</dt>
+<dd><p class="first">type: elasticsearch
+index_name: embulk
+index_type: embulk
+nodes:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>host: localhost</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div></blockquote>
+<p>In fact, this configuration file lacks some important information. However, embulk guesses the other information. So, next step is to order embulk to guess them:</p>
+<blockquote>
+<div>$ embulk guess config.yml -o config-complete.yml</div></blockquote>
+<p>The created config-complete.yml file should include complete information to run the loading as following:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>in:</dt>
+<dd><p class="first">type: file
+path_prefix: ./mydata/csv/
+decoders:
+- {type: gzip}
+parser:</p>
+<blockquote class="last">
+<div>charset: UTF-8
+newline: CRLF
+type: csv
+delimiter: &#8216;,&#8217;
+quote: &#8216;&#8221;&#8217;
+escape: &#8216;&#8217;
+null_string: &#8216;NULL&#8217;
+header_line: true
+columns:
+- {name: id, type: long}
+- {name: account, type: long}
+- {name: time, type: timestamp, format: &#8216;%Y-%m-%d %H:%M:%S&#8217;}
+- {name: purchase, type: timestamp, format: &#8216;%Y%m%d&#8217;}
+- {name: comment, type: string}</div></blockquote>
+</dd>
+<dt>out:</dt>
+<dd>type: elasticsearch
+index_name: embulk
+index_type: embulk
+nodes:
+- {host: localhost}</dd>
+</dl>
+</div></blockquote>
+<p>Now, you can run the bulk loading:</p>
+<blockquote>
+<div>$ embulk run config-complete.yml -o next-config.yml</div></blockquote>
+</div>
+<div class="section" id="scheduling-bulk-loading-by-cron">
+<h2>Scheduling bulk loading by cron<a class="headerlink" href="#scheduling-bulk-loading-by-cron" title="Permalink to this headline">¶</a></h2>
+<p>At the last step, you ran embulk command with <tt class="docutils literal"><span class="pre">-o</span> <span class="pre">next-config.yml</span></tt> file. This file should include a parameter named <tt class="docutils literal"><span class="pre">last_path</span></tt>:</p>
+<blockquote>
+<div>last_path: mydata/csv/sample_01.csv.gz</div></blockquote>
+<p>With this configuration, embulk loads the files newer than this file in alphabetical order.
+For example, if you create <tt class="docutils literal"><span class="pre">./mydata/csv/sample_02.csv.gz</span></tt> file, embulk skips <tt class="docutils literal"><span class="pre">sample_01.csv.gz</span></tt> file and loads <tt class="docutils literal"><span class="pre">sample_02.csv.gz</span></tt> only. And the next next-config.yml file has <tt class="docutils literal"><span class="pre">last_path:</span> <span class="pre">mydata/csv/sample_01.csv.gz</span></tt> for the next next execution.</p>
+<p>So, if you want to loads newly created files, you can setup this cron schedule:</p>
+<blockquote>
+<div>0 * * * * embulk run /path/to/next-config.yml -o /path/to/next-config.yml</div></blockquote>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Embulk Project.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
