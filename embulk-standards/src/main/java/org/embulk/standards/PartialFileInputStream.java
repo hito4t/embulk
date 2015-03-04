@@ -25,54 +25,12 @@ public class PartialFileInputStream extends InputStream {
 	
 	@Override
 	public int read(byte[] b) throws IOException {
-		/*
-		initialize();
-		
-		if (current >= end) {
-			return -1;
-		}
-		
-		int read = original.read(b, 0, Math.min(b.length, (int)(end - current)));
-		if (read >= 0) {
-			current += read;
-		}
-		
-		return read;
-		*/
 		return read(b, 0, b.length);
 	}
 	
 	@Override
 	public int read(byte[] b, int off, int len) throws IOException {
-		/*
-		initialize();
-		
-		if (current >= end) {
-			return -1;
-		}
-
-		int read = original.read(b, off, Math.min(len, (int)(end - current)));
-		if (read >= 0) {
-			current += read;
-		}
-		return read;
-		*/
-		
-		/*
-		for (int i = 0; i < len; i++) {
-			int c = read();
-			if (c < 0) {
-				if (i == 0) {
-					return -1;
-				}
-				return i;
-			}
-			b[off + i] = (byte)c;
-		}
-		return len;
-		*/
-		
-		initialize();
+		initializeIfNeeded();
 
 		if (eof) {
 			return -1;
@@ -99,7 +57,7 @@ public class PartialFileInputStream extends InputStream {
 
 	@Override
 	public int read() throws IOException {
-		initialize();
+		initializeIfNeeded();
 
 		if (eof) {
 			return -1;
@@ -141,7 +99,7 @@ public class PartialFileInputStream extends InputStream {
 		original.close();
 	}
 	
-	private void initialize() throws IOException {
+	private void initializeIfNeeded() throws IOException {
 		if (current >= start) {
 			return;
 			

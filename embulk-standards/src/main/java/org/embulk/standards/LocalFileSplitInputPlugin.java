@@ -127,21 +127,20 @@ public class LocalFileSplitInputPlugin
     public TransactionalFileInput open(TaskSource taskSource, int taskIndex)
     {
         PluginTask task = taskSource.loadTask(PluginTask.class);
-        return new LocalFileInput(task, taskIndex);
+        return new LocalFileSplitInput(task, taskIndex);
     }
 
-    public static class LocalFileInput
+    public static class LocalFileSplitInput
             extends InputStreamFileInput
             implements TransactionalFileInput
     {
-        // TODO create single-file InputStreamFileInput utility
-        private static class SingleFileProvider
+        private static class FileSplitProvider
                 implements InputStreamFileInput.Provider
         {
             private final PartialFile file;
             private boolean opened = false;
 
-            public SingleFileProvider(PartialFile file)
+            public FileSplitProvider(PartialFile file)
             {
                 this.file = file;
             }
@@ -160,9 +159,9 @@ public class LocalFileSplitInputPlugin
             public void close() { }
         }
 
-        public LocalFileInput(PluginTask task, int taskIndex)
+        public LocalFileSplitInput(PluginTask task, int taskIndex)
         {
-            super(task.getBufferAllocator(), new SingleFileProvider(task.getFiles().get(taskIndex)));
+            super(task.getBufferAllocator(), new FileSplitProvider(task.getFiles().get(taskIndex)));
         }
 
         @Override
